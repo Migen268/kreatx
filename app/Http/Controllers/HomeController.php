@@ -24,9 +24,11 @@ class HomeController extends Controller
     public function index()
     {   
         $user = Auth :: user();
+        //nqs useri aktual qe po logohet e ka isAdmin 1 ath coje te admin.blade.php
         if($user->isAdmin==1){
         return view('admin');
         }
+        
         else{
         return view('home');
         }
