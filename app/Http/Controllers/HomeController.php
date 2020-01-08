@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Hash;
 class HomeController extends Controller
 {
     /**
@@ -33,4 +34,33 @@ class HomeController extends Controller
         return view('home');
         }
     }
+
+    public function store(Request $request){
+        
+        $this->validate($request,[
+            'emri' => 'required' ,
+            'email' => 'required',
+            'kalo' => 'required'
+         ]);
+        
+         $post = Auth :: user();
+       // if(!empty($request ->input('emri'))){
+         $post->name = $request ->input('emri');
+        //}   
+         //if(!empty($request ->input('emri'))){
+         $post->email = $request ->input('email');
+        //  }
+        //  if(!empty($request ->input('emri'))){
+         $post->password =Hash::make( $request ->input('kalo'));
+        //  }
+         $post->save();
+
+         return redirect('/home')->with('success','Changes were made successfully!');
+    
+
+
+    }
+
+
+
 }

@@ -20,4 +20,42 @@
         </div>
     </div>
 </div>
+{{-- kodi qe kam shtuar  vete --}}
+<div>
+    <hr>
+</div>
+<div class="text text-info text-center" >
+<h2>Here you can Edit your Profile Data</h2>
+</div>
+
+<div class="container">
+    <form action="{{ action('HomeController@store') }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="k">Name</label>
+            <input type="text"  id="k" class="form-control" name="emri">     
+       </div>
+    
+       <div class="form-group">
+        <label for="ko" class="mr-sm-2">Email</label>
+            <input type="email"  id="ko"  class="form-control" name="email"> 
+       </div>
+
+       <div class="form-group">
+        <label for="ko" class="mr-sm-2">Password</label>
+            <input type="password"  id="ko"  class="form-control" name="kalo"> 
+       </div>
+    
+        <input type="submit" value="Save Changes" class="btn btn-outline-primary ">
+    </form>
+    </div>
+
+
+
+
+
+
+
+
+
 @endsection
