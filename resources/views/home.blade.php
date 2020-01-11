@@ -1,54 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Employee</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+    <div class="page-header float-right">
+    <img class="img-responsive" src="/storage/foto_profili/{{$user->fotoProfili}}"  alt="no  profile picutre choosen"  height="150" width="150" style="position:relative;top:-3em;" >
+  
     </div>
-</div>
-{{-- kodi qe kam shtuar  vete --}}
-<div>
-    <hr>
-</div>
-<div class="text text-info text-center" >
-<h2>Here you can Edit your Profile Data</h2>
-</div>
+ <div class="text-success">
+    
+    <h1>Welcome Employee</h1> 
+
+ </div>
+ <hr>
+
 
 <div class="container">
-    <form action="{{ action('HomeController@store') }}" method="POST">
+
+    <h2 class="text text-info text-center">Here you can Edit your Profile Data</h2>
+    
+    <form action="/home" method="POST" enctype="multipart/form-data" >
         @csrf
         <div class="form-group">
             <label for="k">Name</label>
-            <input type="text"  id="k" class="form-control" name="emri">     
+            <input type="text" value="{{$user->name}}"  id="k" class="form-control" name="emri">     
        </div>
     
        <div class="form-group">
         <label for="ko" class="mr-sm-2">Email</label>
-            <input type="email"  id="ko"  class="form-control" name="email"> 
+            <input type="email"  id="ko" value="{{$user->email}}"  class="form-control" name="email"> 
        </div>
 
        <div class="form-group">
-        <label for="ko" class="mr-sm-2">Password</label>
-            <input type="password"  id="ko"  class="form-control" name="kalo"> 
+        <label for="so" class="mr-sm-2">Profile Picture</label>
+            <input type="file"  id="so"  class="form-control" name="foto"> 
+       </div>
+
+       <div class="form-group">
+        <label for="lo" class="mr-sm-2">Password</label>
+            <input type="password"  id="lo"  class="form-control" name="kalo"> 
        </div>
     
         <input type="submit" value="Save Changes" class="btn btn-outline-primary ">
     </form>
-    </div>
+</div> 
+
 
 
 

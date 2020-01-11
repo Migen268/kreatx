@@ -2,7 +2,7 @@
 
 @foreach ($errors->all() as $error)
 
-<div class="alert alert-danger">    
+<div class="alert alert-danger alert-dismissible fade show">    
     {{$error}}
 </div>
 
@@ -11,11 +11,11 @@
 @endif
 
 
-
+ 
 
 @if(session('success'))
 
-<div class="alert  alert-success">
+<div class="alert  alert-success alert-dismissible fade show">
 
     {{session('success')}}
 
@@ -25,7 +25,7 @@
 
 @if(session('error'))
 
-<div class="alert  alert-danger">
+<div class="alert  alert-danger alert-dismissible fade show">
 
     {{session('error')}}
 

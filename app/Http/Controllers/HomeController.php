@@ -24,42 +24,69 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $user = Auth :: user();
+        $user = Auth::user();
+        $admin = Auth::user()->get();//merr te gjithe recordet e userave nga databaza
         //nqs useri aktual qe po logohet e ka isAdmin 1 ath coje te admin.blade.php
         if($user->isAdmin==1){
-        return view('admin');
+        return view('admin')->with('admin',$admin);
         }
-        
+            
         else{
-        return view('home');
+        return view('home')->with('user',$user);
         }
     }
-
+ 
     public function store(Request $request){
+         
+         $this->validate($request,[
+             'emri' => 'required' ,
+             'email' => 'required',
+            // 'foto' => 'max:1999|required',//pra me e vogel se 2MB
+            'kalo'=> 'required'
+      ]);
         
-        $this->validate($request,[
-            'emri' => 'required' ,
-            'email' => 'required',
-            'kalo' => 'required'
-         ]);
+         $post = Auth::user();
+      
+         if($request ->hasFile('foto') ){
+           
+            $a=$request ->file('foto')->getClientOriginalName();
+            $foto =pathinfo($a,PATHINFO_FILENAME);
+            
+            $prapashtesa = $request ->file('foto')->getClientOriginalExtension();
+            
+            $filenametoStore=$foto.'_'.time().'_'.$prapashtesa ;
+            
+            //i ruaj fotot ne nje folder te config,,upload image
+            $path = $request ->file('foto')->storeAs('/public/foto_profili',$filenametoStore);
+            
+            $post->fotoProfili = $filenametoStore;
+           
+        }
+        else{
+            $filenametoStore='blabslabla.jpg';
+        }
         
-         $post = Auth :: user();
-       // if(!empty($request ->input('emri'))){
-         $post->name = $request ->input('emri');
-        //}   
-         //if(!empty($request ->input('emri'))){
-         $post->email = $request ->input('email');
-        //  }
-        //  if(!empty($request ->input('emri'))){
-         $post->password =Hash::make( $request ->input('kalo'));
-        //  }
+        $post->name = $request->emri;
+        $post->email = $request ->email;
+        $post->password =Hash::make( $request ->kalo);
+        // $post->fotoProfili = $filenametoStore;
          $post->save();
 
-         return redirect('/home')->with('success','Changes were made successfully!');
+         return redirect('/home')->with('success','Data updated');
     
-
-
     }
+public function delete(Request $request){
+   if($request->edit == 'edito'){
+        return 123;
+   }
+        if($request->delete == 'fshi'){
+        return 123888888;
+
+ return redirect('/admin')->with('success','Data deleted');
+        }
+
+}
+
 
 
 
