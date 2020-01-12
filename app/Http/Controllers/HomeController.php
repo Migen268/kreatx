@@ -75,15 +75,44 @@ class HomeController extends Controller
          return redirect('/home')->with('success','Data updated');
     
     }
+
 public function delete(Request $request){
-   if($request->edit == 'edito'){
-        return 123;
-   }
-        if($request->delete == 'fshi'){
-        return 123888888;
+  $id = $request->id;
+    $fshi=Auth::user()->find($id);
+        $fshi->delete();
 
  return redirect('/admin')->with('success','Data deleted');
-        }
+        
+
+}
+public function edit(Request $request){
+
+    $edit=Auth::user()->find($request->id);//merr vetem nje rekord
+
+    return view('edit')->with('edit',$edit);
+
+
+}
+
+
+public function update(Request $request){
+         
+    $this->validate($request,[
+        'emri' => 'required' ,
+        'email' => 'required',
+       // 'foto' => 'max:1999|required',//pra me e vogel se 2MB
+       'kalo'=> 'required'
+ ]);
+   
+    $post = Auth::user()->find($request->id);
+ 
+   $post->name = $request->emri;
+   $post->email = $request ->email;
+   $post->password =Hash::make( $request ->kalo);
+   // $post->fotoProfili = $filenametoStore;
+    $post->save();
+
+    return redirect('/admin/edit')->with('success','Data updated');
 
 }
 

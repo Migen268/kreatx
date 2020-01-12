@@ -20,12 +20,15 @@
     
         <tr>	<td>{{$item->id}}</td> 	<td>{{$item->name}}</td>	 <td>{{$item->email}}</td>	
             <td>
-                <form action="/admin" method="POST">
+                <form  method="POST">
                     @csrf
-                <button type="submit" class="btn btn-outline-primary" name="edit" value="edito"><span>&#9998;</span>Edit</button>
+                    <input type="hidden" value="{{$item->id}}" name="id">
+                <button type="submit" class="btn btn-outline-primary" name="edit" value="edito" onclick="javascript: form.action='/admin/edit';"><span>&#9998;
+                    </span>Edit</button>
             
-            <button  type="submit" class=" btn btn-outline-danger" name="delete" value="fshi"><span>&#128465;</span> Delete
-            </button> 
+            <button  type="submit" class=" btn btn-outline-danger" name="delete" value="fshi" onclick="javascript: form.action='/admin';"><span>&#128465;
+                </span> Delete
+            </button>  
         
         </form>
         </td>
