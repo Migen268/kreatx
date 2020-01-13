@@ -46,6 +46,7 @@
     </table>
     
     </div>
+    <a href="/depart" role="button" class="btn btn-outline-info "> CRUD DEPARTAMENTS </a>
  <script>
  
  $(document).ready(function() {

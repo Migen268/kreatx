@@ -32,7 +32,7 @@
 
        <div class="form-group">
         <label for="lo" class="mr-sm-2">Password</label>
-            <input type="password"  id="lo"  class="form-control" name="kalo" value="{{$edit->password}}"> 
+            <input type="password"  id="lo"  class="form-control" name="kalo" > 
        </div>
     
         <input type="submit" value="Update" class="btn btn-outline-primary ">

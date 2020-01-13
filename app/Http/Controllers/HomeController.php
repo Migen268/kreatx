@@ -85,6 +85,9 @@ public function delete(Request $request){
         
 
 }
+
+
+
 public function edit(Request $request){
 
     $edit=Auth::user()->find($request->id);//merr vetem nje rekord
