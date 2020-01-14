@@ -10,15 +10,15 @@
     {{ csrf_field() }}
     <table class=" display table table-striped table-bordered" id="crud">
         <thead>
-            <tr> <th>ID</th>  <th>Name</th> <th>Email</th><th>Action</th></tr>
+            <tr> <th>ID</th>  <th>Name</th> <th>Email</th><th>Department</th><th>Action</th></tr>
         </thead>
  
     <tbody>
      
-        @foreach ($admin as $item)
-        @if( $item->isAdmin == 0) 
+        @foreach ($admin as $item) 
+        @if( $item->isAdmin == 0)  
     
-        <tr>	<td>{{$item->id}}</td> 	<td>{{$item->name}}</td>	 <td>{{$item->email}}</td>	
+        <tr>	<td>{{$item->id}}</td> 	<td>{{$item->name}}</td>	 <td>{{$item->email}}</td>	<td>{{$item->departID}}</td>
             <td>
                 <form  method="POST">
                     @csrf
@@ -47,6 +47,7 @@
     
     </div>
     <a href="/depart" role="button" class="btn btn-outline-info "> CRUD DEPARTAMENTS </a>
+    <a href="/treeview" role="button" class="btn btn-outline-info "> Tree View </a>
  <script>
  
  $(document).ready(function() {

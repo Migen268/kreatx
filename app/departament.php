@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class departament extends Model
 
 {
-       public function user(){
+    protected $table = 'departaments';
+
+    public function users(){
            
-    return $this->hasMany('App\User');
+    return $this->hasMany('App\User','departID','id');
+} 
 }
-}
- 
+  

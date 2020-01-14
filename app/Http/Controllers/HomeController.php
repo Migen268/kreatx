@@ -78,12 +78,12 @@ class HomeController extends Controller
 
 public function delete(Request $request){
   $id = $request->id;
-    $fshi=Auth::user()->find($id);
+    $fshi=Auth::user()->find($id);//i gjith rekordi me id qe ka te rreshti i tabeles
         $fshi->delete();
 
  return redirect('/admin')->with('success','Data deleted');
         
-
+ 
 }
 
 
@@ -110,9 +110,10 @@ public function update(Request $request){
     $post = Auth::user()->find($request->id);
  
    $post->name = $request->emri;
-   $post->email = $request ->email;
-   $post->password =Hash::make( $request ->kalo);
+   $post->email = $request->email;
+   $post->password =Hash::make( $request->kalo);
    // $post->fotoProfili = $filenametoStore;
+   $post->departID = $request->dept;
     $post->save();
 
     return redirect('/admin/edit')->with('success','Data updated');

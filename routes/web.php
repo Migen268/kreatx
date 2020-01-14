@@ -41,3 +41,6 @@ Route::post('/storedep','Departament@update');
 Route::get('/editodep','Departament@index');
 Route::get('/createdep','Departament@create');
 Route::post('/adddep','Departament@add');
+
+//tree view
+Route::get('/treeview','Departament@treeview');

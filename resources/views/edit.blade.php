@@ -28,11 +28,14 @@
         <label for="ko" class="mr-sm-2">Email</label>
             <input type="email"  id="ko" value="{{$edit->email}}"  class="form-control" name="email"> 
        </div>
-
+       <div class="form-group">
+        <label for="kos" class="mr-sm-2">Department</label>
+            <input type="number"  id="kos" value="{{$edit->departID}}"  class="form-control" name="dept"> 
+       </div>
 
        <div class="form-group">
         <label for="lo" class="mr-sm-2">Password</label>
-            <input type="password"  id="lo"  class="form-control" name="kalo" > 
+            <input type="password"  id="lo" value="{{$edit->password}}" class="form-control" name="kalo" > 
        </div>
     
         <input type="submit" value="Update" class="btn btn-outline-primary ">

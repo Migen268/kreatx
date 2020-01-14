@@ -13,10 +13,10 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array 
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','departID',
     ];
 
     /**
@@ -36,9 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    protected $table = 'users';
     public function departament(){
-        return $this->belongsTo('App\departament');
+        return $this->belongsTo('App\departament','departID');
     }
 
 
 }
+ 

@@ -12,7 +12,7 @@
         <thead>
             <tr> <th>ID</th>  <th>Department Name</th> <th>Action</th></tr>
         </thead>
- 
+  
     <tbody>
      
         @foreach ($dept as $item)

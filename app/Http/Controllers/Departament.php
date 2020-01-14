@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\departament as Dep;
 use Illuminate\Http\Request;
-
+use App\User;
 class Departament extends Controller
 {
     public function index()
@@ -58,12 +58,7 @@ class Departament extends Controller
     public function create()
     {   
     
-      
-        
-       
-        return view('createdep');//->with('dept',$dept);
-     
-            
+        return view('createdep');        
     
     }
 
@@ -85,6 +80,46 @@ class Departament extends Controller
             
     
     }
+
+    public function treeview()
+    {   
+       // $pema =DB::table('departaments')->get();
+//$pema = Dep::get(); ose me eloquent,,behet dhe me all() pervec get()
+    
+    // $treeView =Dep::with(['users'])->get();//behet join me tabelen users
+
+    // return view('treeview')->with('treeView',$treeView);        
+    
+    $users =Dep::where('hierarki', '=', 0)->get();
+    $tree='<ul id="browser" class="filetree"><li class="tree-view"></li>';
+    foreach ($users as $Category) {
+         $tree .='<li class="tree-view closed"<a class="tree-name">'.$Category->Name.'</a>';
+         if($Category->users != null) {
+            $tree .=$this->childView($Category);
+        }
+    }
+    $tree .='<ul>';
+    // return $tree; 
+    return view('treeview',compact('tree'));
+
+    }
+
+    public function childView($Category){                 
+        $html ='<ul>';
+        foreach ($Category->users as $arr) {
+            if($arr->users != null){
+            $html .='<li class="tree-view closed"><a class="tree-name">'.$arr->name.'</a>';                  
+                    $html.= $this->childView($arr);
+                }else{
+                    $html .='<li class="tree-view"><a class="tree-name">'.$arr->name.'</a>';                                 
+                    $html .="</li>";
+                }
+                               
+        }
+        
+        $html .="</ul>";
+        return $html;
+}  
 
 
 
