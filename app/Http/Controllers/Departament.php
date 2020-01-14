@@ -35,7 +35,7 @@ class Departament extends Controller
       public function edit(Request $request){
 
         $edit=DB::table('departaments')->find($request->id);//merr vetem nje rekord
-    
+        
         return view('editdep')->with('edit',$edit);
     
     
@@ -71,6 +71,7 @@ class Departament extends Controller
         $user = new Dep;
 
         $user->name = $request->emri;
+        $user->hierarki =0;
         
         $user->save();
         
@@ -81,46 +82,82 @@ class Departament extends Controller
     
     }
 
-    public function treeview()
-    {   
-       // $pema =DB::table('departaments')->get();
-//$pema = Dep::get(); ose me eloquent,,behet dhe me all() pervec get()
+//     public function treeview()
+//     {   
+//        // $pema =DB::table('departaments')->get();
+// //$pema = Dep::get(); ose me eloquent,,behet dhe me all() pervec get()
     
-    // $treeView =Dep::with(['users'])->get();//behet join me tabelen users
+//     // $treeView =Dep::with(['users'])->get();//behet join me tabelen users
 
-    // return view('treeview')->with('treeView',$treeView);        
+//     // return view('treeview')->with('treeView',$treeView);        
     
-    $users =Dep::where('hierarki', '=', 0)->get();
-    $tree='<ul id="browser" class="filetree"><li class="tree-view"></li>';
-    foreach ($users as $Category) {
-         $tree .='<li class="tree-view closed"<a class="tree-name">'.$Category->Name.'</a>';
-         if($Category->users != null) {
-            $tree .=$this->childView($Category);
-        }
-    }
-    $tree .='<ul>';
-    // return $tree; 
-    return view('treeview',compact('tree'));
+//     $departament =Dep::where('hierarki', '=', 0)->get();
 
-    }
+//     $tree='<ul id="browser" class="filetree">';
+//     foreach ($departament as $Category) {
+//          $tree .='<li class="tree-view closed"<a class="tree-name">'.$Category->Name.'</a>';
+//          if($Category->users != null) {
+//             $tree .=$this->childView($Category);
+//         }
+//     }
+//     $tree .='<ul>';
+//     // return $tree; 
+//     return view('treeview',compact('tree'));
 
-    public function childView($Category){                 
-        $html ='<ul>';
-        foreach ($Category->users as $arr) {
-            if($arr->users != null){
-            $html .='<li class="tree-view closed"><a class="tree-name">'.$arr->name.'</a>';                  
-                    $html.= $this->childView($arr);
-                }else{
-                    $html .='<li class="tree-view"><a class="tree-name">'.$arr->name.'</a>';                                 
-                    $html .="</li>";
-                }
+//     }
+
+//     public function childView($Category){                 
+//         $html ='<ul>';
+//         foreach ($Category->users as $arr) {
+//             if($arr->users != null){
+//             $html .='<li class="tree-view closed"><a class="tree-name">'.$arr->name.'</a>';                  
+//                     $html.= $this->childView($arr);
+//                 }else{
+//                     $html .='<li class="tree-view"><a class="tree-name">'.$arr->name.'</a>';                                 
+//                     $html .="</li>";
+//                 }
                                
-        }
+//         }
         
-        $html .="</ul>";
-        return $html;
-}  
+//         $html .="</ul>";
+//         return $html;
+// }  
 
+public function nendep($id){
+$a['id']=$id;
+return view('addchild')->with('a',$a);
+
+}
+
+public function ruajnendep(Request $request)
+{    
+     $this->validate($request,[
+    'emri' => 'required' 
+            ]);
+
+    $user = new Dep;
+
+    $user->name = $request->emri;
+    $user->hierarki =$request->idparent;
+    
+    $user->save();
+    
+   
+    return redirect('/depart')->with('success','Child Added Successfully');
+ 
+        
+
+}
+
+public function displaytree(){
+
+ $tree = Dep::where('hierarki', '=', 0)->get();
+$nendep = Dep::where('hierarki','!=',0)->get(); 
+
+return view('treeview',compact(['tree','nendep']));
+
+}
+ 
 
 
  

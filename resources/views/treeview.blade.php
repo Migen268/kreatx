@@ -9,7 +9,7 @@
     <h1 class="text-center">Tree View of Departaments </h1>
 </div> 
 
- 
+  
 
 
    {{-- @foreach($treeView as $dep)
@@ -25,16 +25,26 @@ kjo afishon departamentet dhe employee qe ka ..po jo si tree view
 
 @endforeach  --}}
 
-<div id="treeview">      
+{{-- <div id="treeview">      
   {!! $tree !!}
-</div> 
+</div>  --}}
 
 
-<script>
+{{-- <script>
 $('#tree').treeview({data:$tree});
 
 
-</script>
+</script> --}}
+
+@foreach ($tree as $item)
+    <p>{{$item->Name}}</p>
+    @foreach ($nendep as $fmi)
+    @if($item->id == $fmi->hierarki)
+    <p>{{$fmi->Name}}</p>
+@endif
+    @endforeach
+@endforeach
+
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
+use App\departament as Dep;
 class HomeController extends Controller
 {
     /**
@@ -91,8 +92,8 @@ public function delete(Request $request){
 public function edit(Request $request){
 
     $edit=Auth::user()->find($request->id);//merr vetem nje rekord
-
-    return view('edit')->with('edit',$edit);
+    $dep=Dep::get();
+    return view('edit',compact(['edit','dep']));
 
 
 }
@@ -108,12 +109,12 @@ public function update(Request $request){
  ]);
    
     $post = Auth::user()->find($request->id);
- 
+        
    $post->name = $request->emri;
    $post->email = $request->email;
    $post->password =Hash::make( $request->kalo);
    // $post->fotoProfili = $filenametoStore;
-   $post->departID = $request->dept;
+   $post->departID = $request->depname;
     $post->save();
 
     return redirect('/admin/edit')->with('success','Data updated');

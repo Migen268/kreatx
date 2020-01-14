@@ -31,6 +31,7 @@
             </button>  
         
         </form>
+        <a class="btn btn-outline-primary" name="edit" href="/nendepartament/{{$item->id}}" >Add Child Departament  </a>
         </td>
         
         </tr>

@@ -43,4 +43,7 @@ Route::get('/createdep','Departament@create');
 Route::post('/adddep','Departament@add');
 
 //tree view
-Route::get('/treeview','Departament@treeview');
+Route::get('/treeview','Departament@displaytree');
+
+Route::get('/nendepartament/{id}','Departament@nendep');
+Route::post('/addchild','Departament@ruajnendep');

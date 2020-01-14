@@ -30,7 +30,12 @@
        </div>
        <div class="form-group">
         <label for="kos" class="mr-sm-2">Department</label>
-            <input type="number"  id="kos" value="{{$edit->departID}}"  class="form-control" name="dept"> 
+            <select class="form-control"  name="depname">
+            @foreach ($dep as $depname)
+                <option value="{{$depname->id}}">
+                {{$depname->Name}}</option>    
+                @endforeach
+            </select> 
        </div>
 
        <div class="form-group">
