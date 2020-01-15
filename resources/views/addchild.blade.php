@@ -18,5 +18,5 @@
         <input type="submit" value="Add" class="btn btn-outline-primary ">
     </form>
 </div>  
- 
+  
 @endsection

@@ -8,7 +8,7 @@
     
     <h1 class="text-center">Tree View of Departaments </h1>
 </div> 
-
+ 
   
 
 
@@ -25,27 +25,46 @@ kjo afishon departamentet dhe employee qe ka ..po jo si tree view
 
 @endforeach  --}}
 
-{{-- <div id="treeview">      
-  {!! $tree !!}
-</div>  --}}
 
+{{-- punon deri me tre cikle --}}
+{{-- <ul>
+@foreach ($tree as $item )
+  @if($item->hierarki==0)
+    <li>{{$item->Name}}
+   
+       @foreach($tree as $fmi)
+        @if($item->id == $fmi->hierarki)
+    <ul><li> 
+    {{$fmi->Name}}
+    @foreach($tree as $fmi1)
+  
+    @if($fmi->id == $fmi1->hierarki)
+   <ul> <li> 
+    {{$fmi1->Name}}
+ </li></ul>
+    @endif
+    @endforeach  
+  </li></ul>
+    @endif
+  
 
-{{-- <script>
-$('#tree').treeview({data:$tree});
-
-
-</script> --}}
-
-@foreach ($tree as $item)
-    <p>{{$item->Name}}</p>
-    @foreach ($nendep as $fmi)
-    @if($item->id == $fmi->hierarki)
-    <p>{{$fmi->Name}}</p>
-@endif
-    @endforeach
+    @endforeach 
+  </li> 
+    @endif
 @endforeach
+</ul> --}}
 
 
+ 
+
+ {{-- new solution --}}
+ <ul>
+@foreach ($tree as $item )
+   @if($item->hierarki==0)
+ @include('treeview1'); 
+@endif
+@endforeach
+ </ul>
 
 
 @endsection
