@@ -23,7 +23,7 @@ kjo afishon departamentet dhe employee qe ka ..po jo si tree view
     </ul>
   </li>
 
-@endforeach  --}}
+@endforeach  --}}  
 
 
 {{-- punon deri me tre cikle --}}

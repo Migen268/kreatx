@@ -35,6 +35,7 @@ class HomeController extends Controller
         else{
         return view('home')->with('user',$user);
         }
+
     }
  
     public function store(Request $request){

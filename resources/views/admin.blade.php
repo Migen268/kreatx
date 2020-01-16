@@ -54,7 +54,7 @@
              
              $('#crud').DataTable();
          
-         } ); 
+         } );  
                
     </script> 
 
