@@ -144,29 +144,19 @@ public function ruajnendep(Request $request)
     
    
     return redirect('/depart')->with('success','Child Added Successfully');
- 
-        
+        }
 
-}
+
+
 
 public function displaytree(){
 
  $tree = Dep::get();
-//$nendep = Dep::where('hierarki','!=',0)->get(); 
 
-return view('treeview',compact(['tree']));
+return view('treeview')->with('tree',$tree);
 
 }
- 
-public function displaytree1(){
-
-    $tree = Dep::get();
-   //$nendep = Dep::where('hierarki','!=',0)->get(); 
-   
-   return view('treeview',compact(['tree']));
-   
-   }
 
 
- 
+
 }

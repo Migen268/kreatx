@@ -27,11 +27,10 @@ kjo afishon departamentet dhe employee qe ka ..po jo si tree view
 
 
 {{-- punon deri me tre cikle --}}
-{{-- <ul>
+<ul>
 @foreach ($tree as $item )
   @if($item->hierarki==0)
     <li>{{$item->Name}}
-   
        @foreach($tree as $fmi)
         @if($item->id == $fmi->hierarki)
     <ul><li> 
@@ -46,25 +45,25 @@ kjo afishon departamentet dhe employee qe ka ..po jo si tree view
     @endforeach  
   </li></ul>
     @endif
-  
-
     @endforeach 
   </li> 
     @endif
 @endforeach
-</ul> --}}
+</ul> 
 
 
- 
 
  {{-- new solution --}}
- <ul>
+ {{-- <ul>
 @foreach ($tree as $item )
    @if($item->hierarki==0)
- @include('treeview1'); 
+   <li>{{$item->Name}}
+    @include('treeview1')
+    
+  
 @endif
 @endforeach
- </ul>
+</li></ul>  --}}
 
 
 @endsection
