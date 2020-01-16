@@ -151,11 +151,14 @@ public function ruajnendep(Request $request)
 
 public function displaytree(){
 
- $tree = Dep::get();
+ $tree = Dep::where('hierarki','==','0')->get();
 
-return view('treeview')->with('tree',$tree);
+ $fmi = Dep::where('hierarki','!=','0')->get();
+
+ return view('treeview',compact(['tree','fmi']));
 
 }
+
 
 
  
