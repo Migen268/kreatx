@@ -32,7 +32,7 @@ Route::post('/admin/edit/store','HomeController@update');
 Route::get('/admin/edit','HomeController@index');//duhet pa se njoftimet du ti nxjerre po te e njejta faqqe kur ka 
 //field bosh(biraz onemli)
 
-
+ 
 //crud departaments
 Route::get('/depart','Departament@index');
 Route::post('/rdepart','Departament@fshidepart');

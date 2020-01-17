@@ -30,10 +30,10 @@ class HomeController extends Controller
         //nqs useri aktual qe po logohet e ka isAdmin 1 ath coje te admin.blade.php
         if($user->isAdmin==1){
         return view('admin')->with('admin',$admin);
-        }
+        } 
             
         else{
-        return view('home')->with('user',$user);
+        return view('home',compact(['user','admin']));
         }
 
     }

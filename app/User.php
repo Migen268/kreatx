@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Cache;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -41,7 +42,10 @@ class User extends Authenticatable
     public function departament(){
         return $this->belongsTo('App\departament','departID');
     }
-
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
 
 }
  

@@ -19,7 +19,7 @@
     
     <form action="/home" method="POST" enctype="multipart/form-data" >
         @csrf
-        <div class="form-group">
+        <div class="form-group"> 
             <label for="k">Name</label>
             <input type="text" value="{{$user->name}}"  id="k" class="form-control" name="emri">     
        </div>
@@ -44,6 +44,17 @@
 </div> 
 
 
+<br/><br/>
+<div class="col-md-2">
+        <p>Users online</p>
+        @foreach($admin as $useri)
+            @if($user->isOnline())
+                <li>{{$useri->name}}</li>
+            @endif
+        @endforeach
+
+
+</div>
 
 
 

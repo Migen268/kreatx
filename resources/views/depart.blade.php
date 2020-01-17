@@ -3,7 +3,7 @@
 @section('content')
 <div class="text-info">
     
-    <h3 class="text-center ">Welcome Admin,Here You Can CRUD Departaments</h3>
+    <h3 class="text-center ">Welcome Admin,Here You Can CRUD Departments</h3>
 </div>
 
 <div class="container">
