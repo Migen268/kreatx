@@ -43,23 +43,14 @@
     </form>
 </div> 
 
-
-<br/><br/>
-<div class="col-md-2">
-        <p>Users online</p>
-        @foreach($admin as $useri)
-            @if($user->isOnline())
-                <li>{{$useri->name}}</li>
-            @endif
-        @endforeach
-
-
+<br><br>
+<div>
+  <footer  class="py-2 bg-dark text-white-50">
+    <div class="container text-center">
+        <a  href="/chat">Goo Chat</a>
+    </div>
+  </footer>
 </div>
-
-
-
-
-
 
 
 

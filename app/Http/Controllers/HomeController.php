@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use Hash;
 use App\departament as Dep;
+use App\User;
+use App\Message;
+use Pusher\Pusher;
 class HomeController extends Controller
 {
     /**
@@ -24,7 +28,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
+    {    
         $user = Auth::user();
         $admin = Auth::user()->get();//merr te gjithe recordet e userave nga databaza
         //nqs useri aktual qe po logohet e ka isAdmin 1 ath coje te admin.blade.php
@@ -33,7 +37,7 @@ class HomeController extends Controller
         } 
             
         else{
-        return view('home',compact(['user','admin']));
+        return view('home',compact(['user']));
         }
 
     }
@@ -121,6 +125,65 @@ public function update(Request $request){
     return redirect('/admin/edit')->with('success','Data updated');
 
 }
+
+public function chat(){
+    //$chatuser=User::where('id','!=',Auth::id())->get();
+    $chatuser = DB::select("select users.id, users.name, users.fotoProfili, users.email, count(is_read) as unread 
+        from users LEFT  JOIN  messages ON users.id = messages.from and is_read = 0 and messages.to = " . Auth::id() . "
+        where users.id != " . Auth::id() . " 
+        group by users.id, users.name, users.fotoProfili, users.email");
+
+
+    return view('chat',compact(['chatuser']));
+}
+
+
+public function getMessage($user_id)
+{
+    $my_id = Auth::id();
+
+    // Make read all unread message
+    Message::where(['from' => $user_id, 'to' => $my_id])->update(['is_read' => 1]);
+
+    // Get all message from selected user
+    $messages = Message::where(function ($query) use ($user_id, $my_id) {
+        $query->where('from', $user_id)->where('to', $my_id);
+    })->oRwhere(function ($query) use ($user_id, $my_id) {
+        $query->where('from', $my_id)->where('to', $user_id);
+    })->get();
+
+    return view('messages.index', ['messages' => $messages]);
+}
+
+public function sendMessage(Request $request)
+    {
+        $from = Auth::id();
+        $to = $request->receiver_id;
+        $message = $request->message;
+
+        $data = new Message();
+        $data->from = $from;
+        $data->to = $to;
+        $data->message = $message;
+        $data->is_read = 0; // message will be unread when sending message
+        $data->save();
+
+        // pusher
+        $options = array(
+            'cluster' => 'eu',
+           'useTLS' => true
+        );
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
+        $pusher->trigger('my-channel', 'my-event', $data);
+    }
 
 
 

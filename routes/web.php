@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-
+ 
 Route::post('/home','HomeController@store');
 
 Route::post('/admin','HomeController@delete');
@@ -40,10 +40,15 @@ Route::post('/editodep','Departament@edit');
 Route::post('/storedep','Departament@update');
 Route::get('/editodep','Departament@index');
 Route::get('/createdep','Departament@create');
-Route::post('/adddep','Departament@add'); 
+Route::post('/adddep','Departament@add');   
 
 //tree view
 Route::get('/treeview','Departament@displaytree');
 Route::get('/treeview1','Departament@displaytree1');
 Route::get('/nendepartament/{id}','Departament@nendep');
 Route::post('/addchild','Departament@ruajnendep');
+
+//chat 
+Route::get('/chat','HomeController@chat');
+Route::get('/message/{id}', 'HomeController@getMessage')->name('message');
+Route::post('message', 'HomeController@sendMessage');
