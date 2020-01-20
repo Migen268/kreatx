@@ -82,46 +82,7 @@ class Departament extends Controller
     
     }
 
-//     public function treeview()
-//     {   
-//        // $pema =DB::table('departaments')->get();
-// //$pema = Dep::get(); ose me eloquent,,behet dhe me all() pervec get()
-    
-//     // $treeView =Dep::with(['users'])->get();//behet join me tabelen users
 
-//     // return view('treeview')->with('treeView',$treeView);        
-    
-//     $departament =Dep::where('hierarki', '=', 0)->get();
-
-//     $tree='<ul id="browser" class="filetree">';
-//     foreach ($departament as $Category) {
-//          $tree .='<li class="tree-view closed"<a class="tree-name">'.$Category->Name.'</a>';
-//          if($Category->users != null) {
-//             $tree .=$this->childView($Category);
-//         }
-//     }
-//     $tree .='<ul>';
-//     // return $tree; 
-//     return view('treeview',compact('tree'));
-
-//     }
-
-//     public function childView($Category){                 
-//         $html ='<ul>';
-//         foreach ($Category->users as $arr) {
-//             if($arr->users != null){
-//             $html .='<li class="tree-view closed"><a class="tree-name">'.$arr->name.'</a>';                  
-//                     $html.= $this->childView($arr);
-//                 }else{
-//                     $html .='<li class="tree-view"><a class="tree-name">'.$arr->name.'</a>';                                 
-//                     $html .="</li>";
-//                 }
-                               
-//         }
-        
-//         $html .="</ul>";
-//         return $html;
-// }  
 
 public function nendep($id){
 $a['id']=$id;
@@ -146,16 +107,28 @@ public function ruajnendep(Request $request)
     return redirect('/depart')->with('success','Child Added Successfully');
         }
 
+
+
+        public function gjejfmi($id){
+    $b['id']=$id;
+    $f = Dep::where('id',$id)->with(['users'])->get();
+return view('gjejfmi',compact(['b','f']));
+
+}
+
+
+
+
     public function tree_viewe($tree,$root_id){
             $child = "<ul>";
             foreach($tree as $item ){
                 if($item->hierarki== $root_id ){
                     $content =  $this->tree_viewe($tree,$item->id);
                     if(strlen($content)>9){
-                        $child .= "<li><a href='dgfgdf'>" . $item->Name."</a>"  . $content . "</li>";
+                        $child .= "<li><a href='/gjejfmi/".$item->id."'>" . $item->Name."</a>"  . $content . "</li>";
                     }
                     else {
-                        $child .= "<li><a href='dgfgdf'>" . $item->Name ."</a></li>";
+                        $child .= "<li><a href='/gjejfmi/".$item->id."'>" . $item->Name ."</a></li>";
                     }
                    
                 }

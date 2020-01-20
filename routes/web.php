@@ -40,7 +40,9 @@ Route::post('/editodep','Departament@edit');
 Route::post('/storedep','Departament@update');
 Route::get('/editodep','Departament@index');
 Route::get('/createdep','Departament@create');
-Route::post('/adddep','Departament@add');   
+Route::post('/adddep','Departament@add'); 
+Route::get('/gjejfmi/{id}','Departament@gjejfmi');
+
 
 //tree view
 Route::get('/treeview','Departament@displaytree');

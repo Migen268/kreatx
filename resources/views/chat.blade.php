@@ -181,10 +181,10 @@
         });
         var channel = pusher.subscribe('my-channel');
         channel.bind('my-event', function (data) {
-            alert(JSON.stringify(data));
+            //alert(JSON.stringify(data));
             if (my_id == data.from) {
                 $('#' + data.to).click();
-            } else if (my_id == data.to) {
+            } else if (my_id == data.to) { 
                 if (receiver_id == data.from) {
                     // if receiver is selected, reload the selected user ...
                     $('#' + data.from).click();
@@ -212,7 +212,7 @@
                 success: function (data) {
                     $('#messages').html(data);
                     scrollToBottomFunc();
-                }
+                } 
             });
         });
         $(document).on('keyup', '.input-text input', function (e) {
@@ -227,10 +227,12 @@
                     data: datastr,
                     cache: false,
                     success: function (data) {
+                      
                     },
                     error: function (jqXHR, status, err) {
                     },
-                    complete: function () {
+                    complete: function () { 
+                        //setTimeout(scrollToBottomFunc, 1000);//new
                         scrollToBottomFunc();
                     }
                 })
@@ -241,10 +243,10 @@
     function scrollToBottomFunc() {
         $('.message-wrapper').animate({
             scrollTop: $('.message-wrapper').get(0).scrollHeight
-        }, 50);
+        }, 50);//cdo nje sekond
     }
 </script>
-
+ 
 
 
 @endsection

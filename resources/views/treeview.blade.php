@@ -62,20 +62,13 @@ kjo afishon departamentet dhe employee qe ka ..po jo si tree view
 
 
 
-
-
-
- {{-- new solution --}}
- {{-- <ul>
-@foreach ($tree as $item )
-   @if($item->hierarki==0)
-   <li>{{$item->Name}}
-    @include('treeview1')
-    
-  
-@endif
-@endforeach
-</li></ul>  --}}
+<div>
+  <footer  class="py-2 bg-dark text-white-50">
+    <div class="container text-center">
+        <a  href="/home">Goo Back</a>
+    </div>
+  </footer>
+</div>
 
 
 @endsection

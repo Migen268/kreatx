@@ -47,6 +47,13 @@
     </table>
     <a href="/createdep" role="button" class="btn btn-outline-info "> Add new Department </a>  
     </div> 
+    <div>
+        <footer  class="py-2 bg-dark text-white-50">
+          <div class="container text-center">
+              <a  href="/home">Goo Back</a>
+          </div>
+        </footer>
+      </div>
  <script>
  
  $(document).ready(function() {

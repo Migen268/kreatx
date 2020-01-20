@@ -17,5 +17,11 @@
         <input type="submit" value="Add" class="btn btn-outline-primary ">
     </form>
 </div>  
- 
+<div>
+    <footer  class="py-2 bg-light text-white-50">
+      <div class="container text-center">
+          <a  href="/depart">Goo Back</a>
+      </div>
+    </footer>
+  </div>
 @endsection
