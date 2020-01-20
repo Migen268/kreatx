@@ -28,58 +28,36 @@ kjo afishon departamentet dhe employee qe ka ..po jo si tree view
 
 {{-- punon deri me tre cikle --}}
 
-@foreach ($tree as $item )
-<ul>
-
-{{$item->Name}}
-@foreach ($fmi as $child)
-
-@if($item->id==$child->hierarki)
-<ul><li>{{$child->Name}}</li></ul>   
-
-@endif
-@endforeach
-
-</ul>
-    @endforeach
-</ul> 
-
-
-
-
-
-
-
-
-
 {{-- 
-  <ul>
+   <ul>
 @foreach ($tree as $item )
   @if($item->hierarki==0)
     <li>{{$item->Name}}
        @foreach($tree as $fmi)
         @if($item->id == $fmi->hierarki)
-    <ul><li> 
-    {{$fmi->Name}}
-    @foreach($tree as $fmi1)
-  
-    @if($fmi->id == $fmi1->hierarki)
-   <ul> <li> 
-    {{$fmi1->Name}}
- </li></ul>
+          <ul><li>
+          {{$fmi->Name}}
+          @foreach($tree as $fmi1)
+            @if($fmi->id == $fmi1->hierarki)
+              <ul> <li> 
+              {{$fmi1->Name}}
+              </li></ul>
+            @endif
+          @endforeach  
+        </li></ul>
+        @endif
+      @endforeach 
+    </li> 
     @endif
-    @endforeach  
-  </li></ul>
-    @endif
-    @endforeach 
-  </li> 
-    @endif
-      @endforeach
-</ul> 
+  @endforeach
+</ul> --}}
 
     
-    --}}
 
+
+
+
+{!! $value !!}
 
 
 

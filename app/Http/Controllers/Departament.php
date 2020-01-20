@@ -146,18 +146,37 @@ public function ruajnendep(Request $request)
     return redirect('/depart')->with('success','Child Added Successfully');
         }
 
-
+    public function tree_viewe($tree,$root_id){
+            $child = "<ul>";
+            foreach($tree as $item ){
+                if($item->hierarki== $root_id ){
+                    $content =  $this->tree_viewe($tree,$item->id);
+                    if(strlen($content)>9){
+                        $child .= "<li><a href='dgfgdf'>" . $item->Name."</a>"  . $content . "</li>";
+                    }
+                    else {
+                        $child .= "<li><a href='dgfgdf'>" . $item->Name ."</a></li>";
+                    }
+                   
+                }
+            } $child .="</ul>";
+            return $child ;
+    }
+         
 
 
 public function displaytree(){
 
- $tree = Dep::where('hierarki','==','0')->get();
+    $tree = Dep::get();
+ 
+ $value = $this->tree_viewe($tree,0);
 
- $fmi = Dep::where('hierarki','!=','0')->get();
-
- return view('treeview',compact(['tree','fmi']));
+ 
+ return view('treeview')->with('value',$value);
 
 }
+
+
 
 
 

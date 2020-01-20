@@ -123,7 +123,7 @@ public function update(Request $request){
     $post->save();
 
     return redirect('/admin/edit')->with('success','Data updated');
-
+ 
 }
 
 public function chat(){
