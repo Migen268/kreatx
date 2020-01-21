@@ -173,32 +173,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
-        var pusher = new Pusher('23c09879699330f8a11c', {
-            cluster: 'eu',
-            forceTLS: true
-        });
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function (data) {
-            //alert(JSON.stringify(data));
-            if (my_id == data.from) {
-                $('#' + data.to).click();
-            } else if (my_id == data.to) { 
-                if (receiver_id == data.from) {
-                    // if receiver is selected, reload the selected user ...
-                    $('#' + data.from).click();
-                } else {
-                    // if receiver is not seleted, add notification for that user
-                    var pending = parseInt($('#' + data.from).find('.pending').html());
-                    if (pending) {
-                        $('#' + data.from).find('.pending').html(pending + 1);
-                    } else {
-                        $('#' + data.from).append('<span class="pending">1</span>');
-                    }
-                }
-            }
-        });
+       
         $('.user').click(function () {
             $('.user').removeClass('active');
             $(this).addClass('active');
@@ -212,6 +187,8 @@
                 success: function (data) {
                     $('#messages').html(data);
                     scrollToBottomFunc();
+                    
+                    
                 } 
             });
         });
@@ -224,27 +201,40 @@
                 $.ajax({
                     type: "post",
                     url: "message", //post route
-                    data: datastr,
-                    cache: false,
+                    data: datastr, 
+                    cache: false,  
                     success: function (data) {
+                     
+                      scrollToBottomFunc();
+                      merrmesazhe();
                       
-                    },
-                    error: function (jqXHR, status, err) {
-                    },
-                    complete: function () { 
-                        //setTimeout(scrollToBottomFunc, 1000);//new
-                        scrollToBottomFunc();
                     }
-                })
+                    
+                }) 
             }
         });
     });
     // make a function to scroll down auto
     function scrollToBottomFunc() {
         $('.message-wrapper').animate({
-            scrollTop: $('.message-wrapper').get(0).scrollHeight
-        }, 50);//cdo nje sekond
+            scrollTop: $('.message-wrapper').get(0).scrollHeight,
+            }, 50);
     }
+function merrmesazhe(){
+    var m = $('.active').attr('id');
+    $.ajax({
+                type: "get",
+                url: "message/" + m, // get route
+                data: "",
+                cache: false,
+                success: function (data) {
+                    $('#messages').html(data);
+                    scrollToBottomFunc();
+                } 
+            });
+}
+
+
 </script>
  
 

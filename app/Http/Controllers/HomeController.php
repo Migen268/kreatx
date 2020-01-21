@@ -167,22 +167,22 @@ public function sendMessage(Request $request)
         $data->message = $message;
         $data->is_read = 0; // message will be unread when sending message
         $data->save();
-
+       //return back()->with('success','me sukses');
         // pusher
-        $options = array(
-            'cluster' => 'eu',
-           'useTLS' => true
-        );
+        // $options = array(
+        //     'cluster' => 'eu',
+        //    'useTLS' => true
+        // );
 
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            $options
-        );
+        // $pusher = new Pusher(
+        //     env('PUSHER_APP_KEY'),
+        //     env('PUSHER_APP_SECRET'),
+        //     env('PUSHER_APP_ID'),
+        //     $options
+        // );
 
-        $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
-        $pusher->trigger('my-channel', 'my-event', $data);
+        // $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
+        // $pusher->trigger('my-channel', 'my-event', $data);
     }
 
 
