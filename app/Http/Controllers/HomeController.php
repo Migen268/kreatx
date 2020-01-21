@@ -152,8 +152,25 @@ public function getMessage($user_id)
         $query->where('from', $my_id)->where('to', $user_id);
     })->get();
 
+
     return view('messages.index', ['messages' => $messages]);
 }
+
+public function repMessage($user_id)
+{
+    $my_id = Auth::id();
+
+    // Get all message from selected user
+    $messages = Message::where(function ($query) use ($user_id, $my_id) {
+        $query->where('from', $user_id)->where('to', $my_id)->where('is_read',0);
+    })->get();
+
+    // Make read all unread message
+    Message::where(['from' => $user_id, 'to' => $my_id,'is_read'=>0])->update(['is_read' => 1]);
+
+    return $messages;
+}
+
 
 public function sendMessage(Request $request)
     {

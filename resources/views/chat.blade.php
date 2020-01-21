@@ -185,10 +185,11 @@
                 data: "",
                 cache: false,
                 success: function (data) {
-                    $('#messages').html(data);
-                    scrollToBottomFunc();
-                    
-                    
+                  //setInterval(  $('#messages').html(data),1000);
+                  $('#messages').html(data)
+            //      console.log("Mesazhe: ",data);
+                  scrollToBottomFunc();
+                  refresh(receiver_id);
                 } 
             });
         });
@@ -206,7 +207,7 @@
                     success: function (data) {
                      
                       scrollToBottomFunc();
-                      merrmesazhe();
+                      merrmesazhe_sent(message);
                       
                     }
                     
@@ -220,20 +221,61 @@
             scrollTop: $('.message-wrapper').get(0).scrollHeight,
             }, 50);
     }
-function merrmesazhe(){
-    var m = $('.active').attr('id');
-    $.ajax({
-                type: "get",
-                url: "message/" + m, // get route
-                data: "",
-                cache: false,
-                success: function (data) {
-                    $('#messages').html(data);
-                    scrollToBottomFunc();
-                } 
-            });
+// function merrmesazhe(){
+//     var m = $('.active').attr('id');
+//     $.ajax({
+//                 type: "get",
+//                 url: "message/" + m, // get route
+//                 data: "",
+//                 cache: false,
+//                 success: function (data) {
+//                     $('#messages').html(data);
+//                     scrollToBottomFunc();
+//                 } 
+//             });
+// }
+function merrmesazhe_sent(m){
+    $('.messages').append(' <li class="message clearfix">'+
+                '<div class="sent">'+
+                    '<p> '+m+'</p>'+
+                    '<p class="date"></p>'+
+                '</div>'+
+            '</li>');
+         //scrollToBottomFunc();
 }
 
+function refresh(receiver_id){
+    setInterval(function() {
+        $.ajax({
+            type: "get",
+            url: "chati/" + receiver_id, //post route
+            data: "", 
+            cache: false,  
+            success: function (data) {
+              //  console.log(data);
+                if(data.length > 0){
+                    for(var i =0;i<data.length;i++){
+                        $('.messages').append(' <li class="message clearfix">'+
+                                            '<div class="received">'+
+                                                '<p> '+data[i].message+'</p>'+
+                                                '<p class="date"></p>'+
+                                            '</div>'+
+                                        '</li>');
+                    }
+                    scrollToBottomFunc();
+                    
+                }
+               
+
+            //   scrollToBottomFunc();
+            //   merrmesazhe_sent(message);
+                
+            }
+                    
+        })
+        },2000); 
+
+}
 
 </script>
  

@@ -24,10 +24,15 @@ class Departament extends Controller
     public function fshidepart(Request $request){
         $id = $request->id;
 //fshi recordin me id e rreshtit perkates te tabeles
-          $fshi=DB::table('departaments')->where('id',$id)->delete();
+          $fshi = DB::table('departaments')->where('id',$id);
+          $hiq = Dep::where('hierarki',$id)->get();
+          if(count($hiq) == 0){
+              $fshi->delete();
+            return redirect('/depart')->with('success','Data deleted');
+          }
               
       
-       return redirect('/depart')->with('success','Data deleted');
+       return redirect('/depart')->with('error','Can not delete this department');
               
       
       }
@@ -116,7 +121,7 @@ return view('gjejfmi',compact(['b','f']));
 
 }
 
-
+ 
 
 
     public function tree_viewe($tree,$root_id){

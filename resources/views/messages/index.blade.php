@@ -9,7 +9,7 @@
                 </div>
             </li>
         @endforeach
-    </ul>
+    </ul> 
 </div>
 
 <div class="input-text">

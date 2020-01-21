@@ -54,3 +54,4 @@ Route::post('/addchild','Departament@ruajnendep');
 Route::get('/chat','HomeController@chat');
 Route::get('/message/{id}', 'HomeController@getMessage')->name('message');
 Route::post('message', 'HomeController@sendMessage');
+Route::get('/chati/{id}','HomeController@repMessage');
