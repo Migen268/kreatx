@@ -1,4 +1,4 @@
-#General explenation
+#General explenation of project
 <p>Admin can delete and  edit employees.</p>
 <p>Also there are some departments wich have each some employees.<p>
 <p>Admin can crud departments</p>
