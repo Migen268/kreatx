@@ -5,7 +5,4 @@
 <p>Employee can update his profile data + profile picture.</p>
 <h2>Employees can chat with each other in real time</h2>
 
-<h3>The admin is :kreatx@gmail.com with password:111111111</h3>
-<b>Employees</b>
-<h3>password for employees:111111111 or 222222222 or 333333333</h3>
-
+<p>User should have isAdmin column 1 in user table to be an Admin </p>
